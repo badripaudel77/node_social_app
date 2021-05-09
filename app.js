@@ -1,6 +1,16 @@
 const express = require('express')
+
+const dotenv = require('dotenv')
+
 const app = express()
 
-app.listen(3001 || process.env.PORT, () => {
-    console.log("Server started running ")
+//dont need bodyParser for parsing json
+app.use(express.json())
+
+//load the config file
+dotenv.config({path: './config/config.env' })
+
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server started running at PORT : ${process.env.PORT}` )
 })
