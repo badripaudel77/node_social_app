@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
         default : '',
     },
 
-    bbpic : {
+    bgpic : {
         type : String,
         default : '',
     },
