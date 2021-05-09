@@ -1,0 +1,22 @@
+*** Backend  ***
+----------------
+Techs : Node.js , Express JS, MongoDB [mongoose]
+
+dependencies : 
+    "bcrypt": "^5.0.1",
+    "dotenv": "^9.0.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "morgan": "^1.10.0"
+
+    More...
+
+### Features ###
+(i) User can register and login 
+(ii) User can perform CRUD operations related to his/her account
+(iii) Can create post / and other CRUD operations related to his / her own post
+(iv) Can follow and unfollow other users
+(v)  Authentication and Authorization with jsonwebtoken[JWT]
+(vi) Like posts
+ TBC...   
