@@ -2,7 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 
-const { registerUser, welcomeUser } = require('../controllers/userController');
+const { registerUser, userLogin, welcomeUser } = require('../controllers/userController');
 const authenticateUser = require('../middleware/auth');
 
 //TODO : ...
@@ -11,6 +11,8 @@ const authenticateUser = require('../middleware/auth');
 router.get("/", welcomeUser);
 
 router.post('/register', registerUser)
+router.post('/login', userLogin)
+
 
 //apply middleware for protected paths / urls
 //router.use(authenticateUser)
