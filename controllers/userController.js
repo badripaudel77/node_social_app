@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
+const { findById } = require('../models/User')
 
 //load the config file
 dotenv.config({path: './config/config.env' });
@@ -119,9 +120,7 @@ const followUser = async (req, res, next) => {
     const id = req.params.id
     const { idToFollow } = req.body
 
-    if(!(id === req.user.userId)) {
-        return res.status(404).json({ error : 'You\'re not authorized to perform this operation'})        
-    }
+    if(!(id === req.user.userId)) return res.status(404).json({ error : 'You\'re not authorized to perform this operation'})        
 
     if(req.user.userId === idToFollow) return res.status(401).json({ error : 'You can\'t follow yourself'})        
 
@@ -135,7 +134,7 @@ const followUser = async (req, res, next) => {
         if(currentUser.following.includes(idToFollow)) {
             return res.status(401).json({ error : 'You have already followed this user'})
         }
-        //update both user and currentuser
+        //update both user[followers] and currentuser[following]
         await user.updateOne({$push : { followers : req.user.userId}})
         await currentUser.updateOne({$push : { following : idToFollow}})
        
@@ -144,6 +143,40 @@ const followUser = async (req, res, next) => {
     catch (error) {
         return res.status(500).json({ error : 'Couldn\'t follow this user, server error'})        
     }
+}
+
+const getFollowers = async (req, res, next) => {
+    const userId = req.params.userId
+
+
+    if(!userId) return res.status(401).json({ error : 'Unauthorized to perform this action[no user id found]'})
+    
+    if(!mongoose.isValidObjectId(userId)) 
+    return res.status(401).json({ error : 'Unauthorized to perform this action[not a valid user]'})
+
+    //if(!(userId === req.user.userId)) return res.status(401).json({ error : 'you can\'t see other person\'s followers'})
+
+    const currentUser = await User.findById(userId)
+    if(!currentUser) return res.status(401).json({ error : 'Unauthorized to perform this action[no user found with this id]'})
+
+    return res.status(200).json({message :  currentUser.followers})
+}
+
+const getFollowing = async (req, res, next) => {
+    const userId = req.params.userId
+
+
+    if(!userId) return res.status(401).json({ error : 'Unauthorized to perform this action[no user id found]'})
+    
+    if(!mongoose.isValidObjectId(userId)) 
+    return res.status(401).json({ error : 'Unauthorized to perform this action[not a valid user]'})
+
+    //if(!(userId === req.user.userId)) return res.status(401).json({ error : 'you can\'t see other person\'s followers'})
+
+    const currentUser = await User.findById(userId)
+    if(!currentUser) return res.status(401).json({ error : 'Unauthorized to perform this action[no user found with this id]'})
+
+    return res.status(200).json({message :  currentUser.following})
 }
 
 const welcomeUser = (req, res, next) => {
@@ -156,4 +189,6 @@ module.exports = {
     userLogin,
     userUpdate,
     followUser,
+    getFollowers,
+    getFollowing,
 }
