@@ -10,6 +10,7 @@ const {
     followUser,
     getFollowers,
     getFollowing,
+    unfollowUser,
 
 } = require('../controllers/userController');
 const authenticateUser = require('../middleware/auth');
@@ -29,9 +30,8 @@ router.use(authenticateUser)
 //update user
 router.put('/update/:userId', userUpdate)
 router.patch('/follow/:id', followUser)
+router.patch('/unfollow/:id', unfollowUser)
 router.get('/followers/:userId', getFollowers)
 router.get('/following/:userId', getFollowing)
-
-
 
 module.exports = router

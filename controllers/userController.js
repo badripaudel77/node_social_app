@@ -145,6 +145,37 @@ const followUser = async (req, res, next) => {
     }
 }
 
+//unfollow the user
+const unfollowUser = async (req, res, next) => {
+    const id = req.params.id
+    const { idToUnfollow } = req.body
+
+    if(!(id === req.user.userId)) return res.status(404).json({ error : 'You\'re not authorized to perform this operation'})        
+
+    if(req.user.userId === idToUnfollow) return res.status(401).json({ error : 'You can\'t unfollow yourself'})        
+
+    if(!idToUnfollow) return res.status(404).json({ error : 'User\'s ID to unfollow not found'})
+
+    if(!mongoose.isValidObjectId(req.body.idToUnfollow)) return res.status(404).json({ error : 'This user isn\'t a valid user'})
+    try {
+        const user = await User.findById(idToUnfollow)
+        const currentUser = await User.findById(req.user.userId)
+
+        if(!(currentUser.following.includes(idToUnfollow))) {
+            return res.status(401).json({ error : 'This user isn\'t your follower'})
+        }
+        //update both user[followers] and currentuser[following]
+        await user.updateOne({$pull : { followers : req.user.userId}})
+        await currentUser.updateOne({$pull : { following : idToUnfollow}})
+       
+        return res.status(201).json({ message : "You have followed this user"})
+    } 
+    catch (error) {
+        return res.status(500).json({ error : 'Couldn\'t follow this user, server error'})        
+    }
+}
+
+
 const getFollowers = async (req, res, next) => {
     const userId = req.params.userId
 
@@ -189,6 +220,7 @@ module.exports = {
     userLogin,
     userUpdate,
     followUser,
+    unfollowUser,
     getFollowers,
     getFollowing,
 }
