@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
 
-
 //load the config file
 dotenv.config({path: './config/config.env' });
 
@@ -87,6 +86,8 @@ const userUpdate = async (req, res, next) => {
     const userId = req.params.userId
     const { password } = req.body
 
+    //if(!mongoose.isValidObjectId(userId))
+
     let user
 
     try {
@@ -111,7 +112,39 @@ const userUpdate = async (req, res, next) => {
     catch (error) {
         return res.status(404).json({ error : 'Couldn\'t update your password'})
     }
-}    
+} 
+
+//follow the user
+const followUser = async (req, res, next) => {
+    const id = req.params.id
+    const { idToFollow } = req.body
+
+    if(!(id === req.user.userId)) {
+        return res.status(404).json({ error : 'You\'re not authorized to perform this operation'})        
+    }
+
+    if(req.user.userId === idToFollow) return res.status(401).json({ error : 'You can\'t follow yourself'})        
+
+    if(!idToFollow) return res.status(404).json({ error : 'User\'s ID to follow not found'})
+
+    if(!mongoose.isValidObjectId(req.body.idToFollow)) return res.status(404).json({ error : 'This user isn\'t a valid user'})
+    try {
+        const user = await User.findById(idToFollow)
+        const currentUser = await User.findById(req.user.userId)
+
+        if(currentUser.following.includes(idToFollow)) {
+            return res.status(401).json({ error : 'You have already followed this user'})
+        }
+        //update both user and currentuser
+        await user.updateOne({$push : { followers : req.user.userId}})
+        await currentUser.updateOne({$push : { following : idToFollow}})
+       
+        return res.status(201).json({ message : "You have followed this user"})
+    } 
+    catch (error) {
+        return res.status(500).json({ error : 'Couldn\'t follow this user, server error'})        
+    }
+}
 
 const welcomeUser = (req, res, next) => {
     res.json({welcome : 'register'})
@@ -122,4 +155,5 @@ module.exports = {
     registerUser,
     userLogin,
     userUpdate,
+    followUser,
 }
