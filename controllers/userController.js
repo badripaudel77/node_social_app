@@ -83,12 +83,43 @@ const userLogin = async (req, res, next) => {
         }
     }
 
+const userUpdate = async (req, res, next) => {
+    const userId = req.params.userId
+    const { password } = req.body
+
+    let user
+
+    try {
+         user = await User.findById(userId)
+    } 
+    catch (error) {
+        return res.status(500).json({ error : 'Something went wrong'})    
+    }
+
+    if(!user) return res.status(404).json({ error : 'User with that user Id not found.'})
+
+    if(!(req.user.userId === user._id.toString())) return res.status(401).json( { error : "You're not authorized to perform this action."})
+    
+     //hash the password
+     const salt = await bcrypt.genSalt(10);
+     const hashedPassword = await bcrypt.hash(password, salt)
+
+    try {
+        await User.findByIdAndUpdate(userId, { password : hashedPassword })
+        return res.status(200).json({ message : 'Your password has been updated'})    
+    } 
+    catch (error) {
+        return res.status(404).json({ error : 'Couldn\'t update your password'})
+    }
+}    
+
 const welcomeUser = (req, res, next) => {
     res.json({welcome : 'register'})
 }
 
 module.exports = {
+    welcomeUser,
     registerUser,
     userLogin,
-    welcomeUser,
+    userUpdate,
 }

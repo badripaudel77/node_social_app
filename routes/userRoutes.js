@@ -2,7 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 
-const { registerUser, userLogin, welcomeUser } = require('../controllers/userController');
+const { welcomeUser, registerUser, userLogin, userUpdate } = require('../controllers/userController');
 const authenticateUser = require('../middleware/auth');
 
 //TODO : ...
@@ -15,6 +15,10 @@ router.post('/login', userLogin)
 
 
 //apply middleware for protected paths / urls
-//router.use(authenticateUser)
+
+router.use(authenticateUser)
+
+//update user
+router.put('/update/:userId', userUpdate)
 
 module.exports = router

@@ -10,7 +10,7 @@ const authenticateUser = (req, res, next) => {
         //Bearer token
         const token = req.headers.authorization.split(' ')[1] 
 
-        if(!token) return res.status(401).json({authFailed : 'No token found, please try again by signin up.' })
+        if(!token) return res.status(401).json({error : 'No token found, please try again by signin up.' })
             
         else {
             //get the decoded value
@@ -25,7 +25,7 @@ const authenticateUser = (req, res, next) => {
         }
     } 
     catch (error) {
-        return res.status(401).json({authFailed : "Token Is not a valid token"})
+        return res.status(401).json({error : "Token Is not a valid token"})
     }
 }
 module.exports = authenticateUser
