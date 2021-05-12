@@ -146,10 +146,10 @@ const unlikePost = async (req, res, next) => {
       if(!(post.likes.includes(req.user.userId))) return res.status(401).json({ message : "you've not liked this post yet."})
       await post.updateOne( { $pull : { likes : req.user.userId}})
 
-      return res.status(200).json({ message : "you unliked this post."})
+      return res.status(200).json({ message : "you unliked this post"})
     } 
     catch (error) {
-      return res.status(500).json({ message : "something went wrong while unliking the post " + error.message})
+       return res.status(500).json({ message : "something went wrong while unliking the post " + error.message})
     }
 }
 
