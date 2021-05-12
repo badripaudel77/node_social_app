@@ -4,7 +4,6 @@ const dotenv = require('dotenv')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
-const { findById } = require('../models/User')
 
 //load the config file
 dotenv.config({path: './config/config.env' });
@@ -178,7 +177,6 @@ const unfollowUser = async (req, res, next) => {
 
 const getFollowers = async (req, res, next) => {
     const userId = req.params.userId
-
 
     if(!userId) return res.status(401).json({ error : 'Unauthorized to perform this action[no user id found]'})
     
