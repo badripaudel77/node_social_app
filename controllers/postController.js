@@ -111,9 +111,53 @@ const deletePost = async (req, res, next) => {
     }
 }
 
+//like the post
+const likePost = async (req, res, next) => {
+    const postId = req.params.postId
+    if(!postId) return res.status(404).json({ error : "No post id found."})
+
+    if(!(mongoose.isValidObjectId(postId))) return res.status(404).json({ error : "This is not a valid post ID"})
+
+    try {
+      const post = await Post.findById(postId)  
+      if(!post) return res.status(404).json({ error : "No post found."})
+
+      if(post.likes.includes(req.user.userId)) return res.status(401).json({ message : "you can't like the same post twice."})
+      await post.updateOne( { $push : { likes : req.user.userId}})
+
+      return res.status(200).json({ message : "you liked this post."})
+    } 
+    catch (error) {
+      return res.status(500).json({ message : "something went wrong while liking the post " + error.message})
+    }
+}
+
+//unlike the post
+const unlikePost = async (req, res, next) => {
+    const postId = req.params.postId
+    if(!postId) return res.status(404).json({ error : "No post id found."})
+
+    if(!(mongoose.isValidObjectId(postId))) return res.status(404).json({ error : "This is not a valid post ID"})
+
+    try {
+      const post = await Post.findById(postId)  
+      if(!post) return res.status(404).json({ error : "No post found"})
+
+      if(!(post.likes.includes(req.user.userId))) return res.status(401).json({ message : "you've not liked this post yet."})
+      await post.updateOne( { $pull : { likes : req.user.userId}})
+
+      return res.status(200).json({ message : "you unliked this post."})
+    } 
+    catch (error) {
+      return res.status(500).json({ message : "something went wrong while unliking the post " + error.message})
+    }
+}
+
 module.exports = {
     getAllPosts,
     createPost, 
     updatePost,
     deletePost,
+    likePost,
+    unlikePost,
 }
