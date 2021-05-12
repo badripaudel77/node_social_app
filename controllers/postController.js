@@ -27,6 +27,24 @@ const getAllPosts = async (req, res, next) => {
     }
 }
 
+//get one post
+const getOnePost = async (req,res,next) => {
+    const postId = req.params.postId
+    if(!postId) return res.status(401).json({ error : 'No Post Id found'})
+    
+    if(!(mongoose.isValidObjectId(postId))) return res.status(401).json({ error : "Post ID isn't a valid post Id"})
+
+    try {
+        const post = await Post.findById(postId)
+        if(!post) return res.status(401).json({ error : "Post ID isn't a valid post Id"})
+
+        return res.status(200).json({ message : post })
+    } 
+    catch (error) {
+        return res.status(401).json({ error : "Something went wrong while fetching single post" + error.message})
+    }
+}
+
 //creating a new post
 const createPost = async (req, res, next) => {
     const { title, image, owner } = req.body
@@ -155,6 +173,7 @@ const unlikePost = async (req, res, next) => {
 
 module.exports = {
     getAllPosts,
+    getOnePost,
     createPost, 
     updatePost,
     deletePost,

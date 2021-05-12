@@ -4,7 +4,7 @@ const router = express.Router()
 
 const authenticateUser = require('../middleware/auth');
 
-const { getAllPosts, createPost, updatePost, deletePost, likePost, unlikePost } = require('../controllers/postController')
+const { getAllPosts, getOnePost, createPost, updatePost, deletePost, likePost, unlikePost } = require('../controllers/postController')
 
 
 //apply middleware for protected paths / urls
@@ -12,6 +12,7 @@ router.use(authenticateUser)
 
 //routes
 router.get('/:userId', getAllPosts)
+router.get('/one/:postId', getOnePost)
 router.post('/new', createPost)
 router.put('/update/:postId', updatePost)
 router.delete('/delete/:postId', deletePost)
