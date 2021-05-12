@@ -16,8 +16,9 @@ Techs : Node.js , Express JS, MongoDB [mongoose]
 (iii) Can create post / and other CRUD operations related to his / her own post
 (iv) Can follow and unfollow other users
 (v)  Authentication and Authorization with jsonwebtoken[JWT]
-(vi) Like posts
- TBC...   
+(vi) Like posts / unline posts
+(vii) User (one) to Post (many) relationships
+  TBC...   
 
 -----------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------

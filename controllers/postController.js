@@ -86,26 +86,28 @@ const updatePost = async (req, res, next) => {
     }
 }
 
-
 //delete post
 const deletePost = async (req, res, next) => {
     const postId = req.params.postId
     if(!postId) return res.status(404).json({error : 'No post Id found'})
+    if(!(mongoose.isValidObjectId(postId))) return res.status(401).json({ error : "This post id isn't valid"})
 
     let post, user
     try {
         post = await Post.findById(postId)
-    
-        if(!(post.owner === req.user.userId)) return res.status(401).json({error : "you'e not authorized to delete this post"})
-    
-        user = await User.findById(post.owner)
-        if(!user) return res.status(404).json({error : "No user found"})
+        if(!post) return res.status(404).json({ error : "No post found"})
 
-        await Post.findOneAndRemove(postId)
-        await user.updateOne({$pull : { posts : postId}})        
+        if(!(post.owner.toString() === req.user.userId)) return res.status(401).json({error : "you'e not authorized to delete this post"})
+
+        user = await User.findById(req.user.userId)
+        if(!user) return res.status(404).json({ error : "No user found"})
+
+        await Post.findByIdAndDelete(postId)
+        await user.updateOne({$pull : { posts : postId}})   
+        return res.status(200).json({ message : `Post with post id  postId ${postId} got deleted.`})     
     } 
     catch (error) {
-         return res.status(500).json({error : "Something went wrong while deleting  this post."})    
+         return res.status(500).json({error : "Something went wrong while deleting this post, " + error.message})    
     }
 }
 
