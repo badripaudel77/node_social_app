@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import  styles from './Login.module.css'
 
@@ -14,7 +15,9 @@ const Login = () => {
   
                <input className={styles.submit} type="submit" value="Login Now" />
                
-               <input style ={{background: 'blue'}} className={styles.submit} type="button" value="Register Instead ?" />
+               <Link to='/register' >
+                   <input style ={{background: 'blue'}} className={styles.submit} type="button" value="Register Instead ?" />
+                </Link>
             </form>
         </div>
     )

@@ -18,8 +18,8 @@ const Navbar = () => {
                     <input  className={styles.header_input} type="text" placeholder="Search Something ... " name="search" />
                 </div>
                     <div className={styles.header_links}>
-                        <span className={styles.header_link}>link</span>
-                        <span className={styles.header_link}>link</span>
+                        <span className={styles.header_link}>Home</span>
+                        <span className={styles.header_link}>Tredning</span>
                     </div>
                     <div className={styles.header_icons}>
                         <span className={styles.header_icon}><PeopleIcon /><span className={styles.header_icons_badge}>2</span></span>

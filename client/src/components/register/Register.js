@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import  styles from './Register.module.css'
 
@@ -20,7 +21,9 @@ const Register = () => {
                  
                <input className={styles.submit} type="submit" value="Register Account" />
 
-               <input style ={{background: 'blue'}} className={styles.submit} type="button" value="Login Instead?" />
+               <Link to='/login'>
+                    <input style ={{background: 'blue'}} className={styles.submit} type="button" value="Login Instead?" />
+               </Link>
             </form>
         </div>
     )
