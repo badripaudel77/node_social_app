@@ -1,0 +1,85 @@
+.header {
+    display: flex;
+    height: 60px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: green;
+    color: wheat;
+    align-items: center;
+}
+
+.header_logo {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex: 0.2;
+    margin-left: 10px;
+}
+
+.header_searchbar {
+    display: flex;
+    align-items: center;
+    flex: 0.3;
+    background-color: gainsboro;
+    border-radius: 30px;
+    margin-right: 7px;
+}
+.header_search_icon {
+    color: black;
+    padding: 3px;
+    margin-left: 5px;
+}
+
+.header_input {
+    background-color: gainsboro;
+    border : none;
+    outline: none;
+    width: 80%;
+}
+
+.header_links {
+    display: flex;
+    align-items: center;
+    flex: 0.2;
+    margin-left: 10px;
+}
+.header_link {
+    margin-right: 11px;
+}
+
+.header_icons {
+    display: flex;
+    align-items: center;
+    flex: 0.3;
+}
+.header_icon {
+    margin-right: 11px;
+    position: relative;
+}
+
+.header_icons_badge {
+    position: absolute;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    top : -4px;
+    right: 0px;
+    font-size: small;
+}
+
+.header_profile {
+   margin : 10px;
+}
+
+.header_avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.header_icon:hover, .header_logo:hover, .header_link:hover, .header_avatar:hover {
+    cursor: pointer;
+    color: white;
+}

@@ -31,9 +31,18 @@ dependencies :
     "morgan": "^1.10.0"
 
     More...
-
------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------
 
+------------------------------------------------------------------------------------------
+*** Frontend ***
+------------------------------------------------------------------------------------------
 
+-- Manipulate the backend using  components and Contex API (or react-redux)
 
+dependencies : 
+            (i)   Material Ui - npm install @material-ui/core npm i @material-ui/icons
+            (ii)  React router dom - npm i react-router-dom
+            (iii) React icons npm install react-icons --save
+
+  -> Google fonts link added and font applied in index.css
+  # font-family: 'Nanum Gothic', sans-serif;

@@ -1,12 +1,11 @@
-import './App.css';
+import Navbar from './components/navbar/Navbar';
+import LeftSidebar from './components/sidebar/LeftSidebar';
 
 function App() {
   return (
-    <div className="app">
-      <header className="app_header">
-        <h2>MERN STACK COMMUNICATION APP</h2>
-      </header>
-    </div>
+        <div>
+                <Navbar />
+        </div>
   );
 }
 

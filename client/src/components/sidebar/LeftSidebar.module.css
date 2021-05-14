@@ -1,0 +1,63 @@
+.LeftSidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    padding: 10px;
+    margin: 25px 10px;
+}
+
+.text {
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.icons:hover {
+    background-color: rgba(124, 106, 141, 0.164);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.suggested_user {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    width: 95%;
+    background-color: rgba(220, 220, 220, 0.603);
+    border : 2px solid gainsboro;
+    align-items: center;
+    border-bottom: 2px solid gold;
+}
+.suggested_user:hover {
+    cursor: pointer;
+    background-color: rgb(220, 220, 220);
+}
+
+.suggested_user_name {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    box-shadow: black;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.follow_button {
+    background-color: green;
+    color :wheat;
+    padding: 5px;
+}
+
+.follow_button:hover{
+    background-color: rgba(0, 128, 0, 0.411);
+    cursor: pointer;
+}
