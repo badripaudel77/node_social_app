@@ -1,0 +1,66 @@
+.postCard {
+     margin: 15px;
+    -webkit-box-shadow: 0px 0px 7px 1px #000000; 
+    box-shadow: 0px 0px 7px 1px #000000;
+    background-color: white;
+    padding: 20px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    /* border-bottom: 3px solid gray; */
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 70%;
+    outline: none;
+    border: none;
+    height: 20px;
+    border-radius: 30px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(128, 128, 128, 0.123);
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+.icons:hover {
+    cursor: pointer;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+.icon_text {
+    color : black;
+    margin-left: 5px;
+}
+
+.button {
+    padding: 5px;
+    margin-right: 15px;
+    min-width: 70px;
+    color: wheat;
+    background-color: blueviolet;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: rgba(137, 43, 226, 0.835);
+}
