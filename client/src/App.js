@@ -1,10 +1,9 @@
-import Navbar from './components/navbar/Navbar';
-import LeftSidebar from './components/sidebar/LeftSidebar';
+import Home from './components/Home/Home'
 
 function App() {
   return (
         <div>
-                <Navbar />
+               <Home />
         </div>
   );
 }

@@ -1,0 +1,5 @@
+.feed {
+    background-color: royalblue;
+    /* out of 12 column take 5 cols */
+    flex: 5; 
+}
