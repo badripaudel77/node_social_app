@@ -50,14 +50,20 @@ const UserSchema = new mongoose.Schema({
     }],
     
     followers : [{
-        type : Array,
+        type : mongoose.Types.ObjectId,
+        ref : 'User',
         default : [], 
     }],
     
     following : [{
-        type : Array,
-        default : [],
+        type : mongoose.Types.ObjectId,
+        ref : 'User',
+        default : [], 
     }],
+    joined_date : {
+        type : Date,
+        default : Date.now
+    },
     
     // activated : {
     //      type : Boolean,

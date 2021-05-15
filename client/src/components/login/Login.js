@@ -11,19 +11,24 @@ const Login = () => {
     const history = useHistory();
     
     const authContext = useContext(AuthContext)
-    const { login } = authContext
+    const { login, isAuthenticated,error } = authContext
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage , setErrorMessage] = useState('')
 
-    let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
+    //let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
   
+    useEffect(() => {
+        if(isAuthenticated) {
+            history.push("/");
+        }
+    // eslint-disable-next-line
+    }, [isAuthenticated])
+
     const login_ = (e) => {
         setErrorMessage('')
         e.preventDefault()
-
-        const { error } = authContext
 
         if(password === null) {
             setErrorMessage('* Password Can\'t be empty *')
@@ -36,17 +41,11 @@ const Login = () => {
             login({
                 email,
                 password
-            })        } 
+            })} 
         catch (error) {
           setErrorMessage("* That User doesn't exist *")     
         }
     }
-
-    useEffect(() => {
-        if(token) {
-            history.push('/')
-        }
-    }, [token])
 
     return (
         <div className={styles.login}>

@@ -10,7 +10,6 @@ const Register = () => {
     const history = useHistory();
 
     const authContext = useContext(AuthContext)
-    const { register  } = authContext
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -21,15 +20,18 @@ const Register = () => {
    
     let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
 
+    const {register, isAuthenticated, error} = authContext;
+ 
+
     useEffect(() => {
-        if(token) {
-            history.push('/')
+        if(isAuthenticated) {
+            history.push("/");
         }
-    }, [token])
+    // eslint-disable-next-line
+    }, [isAuthenticated])
 
     const register_ = (e) => {
         e.preventDefault();
-        const { error } = authContext
         setErrorMessage('')
         if(password !== confirmPassword) {
             setErrorMessage('* Two Passwords doesn\'t match *')

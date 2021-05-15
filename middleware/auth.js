@@ -3,12 +3,14 @@ const jwt = require('jsonwebtoken')
 const authenticateUser = (req, res, next) => {
     try {
 
-         //const token = req.header('auth_token') anything like this can be used because 
+         const token = req.header('auth_token') 
+         console.log('tokne / ' + token  );
+         //anything like this can be used because 
         //auth_token or Bearer token is what we send from postman or brower in request. 
         // just code according to that.
         
         //Bearer token
-        const token = req.headers.authorization.split(' ')[1] 
+        //const token = req.headers.authorization.split(' ')[1] 
 
         if(!token) return res.status(401).json({error : 'No token found, please try again by signin up.' })
             

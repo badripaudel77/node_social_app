@@ -12,17 +12,20 @@ import styles from './Home.module.css'
 import AuthContext from '../../context/auth/authContex'
 
 
+
 function Home() {
-  //const authContext = useContext(AuthContext)
-  //const { isAuthenticated } = authContext
+  const authContext = useContext(AuthContext)
+  const { isAuthenticated } = authContext
   const history = useHistory();
   
   let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
   
   useEffect(() => {
     if(!token) {
-     history.push('/login')
+      return history.push('/login')
     }
+    authContext.loadUser() 
+    // eslint-disable-next-line
   }, [token])
 
   return (

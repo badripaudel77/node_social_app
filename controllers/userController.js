@@ -8,6 +8,18 @@ const User = require('../models/User')
 //load the config file
 dotenv.config({path: './config/config.env' });
 
+const getUser = async (req, res, next) => {
+
+    try {
+        // don't include password.  
+        const user = await User.findById(req.user.userId).select('-password'); 
+        return res.status(200).json({"message " : user})
+
+    } catch (error) {
+        return res.status(500).json({error : "User couldn't found."})
+    }
+}
+
 //register the user
 const registerUser = async (req, res, next) => {
     const { name, email , password } = req.body;
@@ -44,6 +56,7 @@ const registerUser = async (req, res, next) => {
          catch (error) {
             return res.status(500).json({error: "Couldn't signed up, try again."})
          }
+         res.header('auth_token');
          return res.status(200).json({message : 'User Registered Successfully',
                     _id : newUser._id, email : newUser.email, 
                     token
@@ -73,8 +86,8 @@ const userLogin = async (req, res, next) => {
                 process.env.token_secret,
             { expiresIn : '7h' });
 
-            res.header('authorization');
-            return res.status(200).json({message : token, email : user.email})
+            res.header('auth_token');
+            return res.status(200).json({message : "login Successfully done",token : token, email : user.email})
     
         } 
         catch (error) {
@@ -221,4 +234,5 @@ module.exports = {
     unfollowUser,
     getFollowers,
     getFollowing,
+    getUser
 }

@@ -1,6 +1,7 @@
 const express = require('express')
 
 const dotenv = require('dotenv')
+const cors = require('cors')
 
 //morgan is the logging middleware
 const morgan = require('morgan') 
@@ -18,6 +19,9 @@ const app = express()
 
 //dont need bodyParser for parsing json
 app.use(express.json())
+
+//cors 
+app.use(cors())
 
 //load the config file
 dotenv.config({path: './config/config.env' })

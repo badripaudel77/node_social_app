@@ -131,6 +131,7 @@ const deletePost = async (req, res, next) => {
 
 //like the post
 const likePost = async (req, res, next) => {
+    console.log(req.user);
     const postId = req.params.postId
     if(!postId) return res.status(404).json({ error : "No post id found."})
 

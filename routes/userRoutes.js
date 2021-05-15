@@ -6,6 +6,7 @@ const {
     welcomeUser,
     registerUser,
     userLogin,
+    getUser,
     userUpdate,
     followUser,
     getFollowers,
@@ -27,6 +28,8 @@ router.post('/login', userLogin)
 //apply middleware for protected paths / urls
 router.use(authenticateUser)
 
+// get users
+router.get('/user', getUser)
 //update user
 router.put('/update/:userId', userUpdate)
 router.patch('/follow/:id', followUser)

@@ -10,7 +10,7 @@ const RightSidebar = () => {
                 <span>John and 2 of your other friends have birthday today.</span>
                 <img alt="user" className={styles.img} src="https://www.143greetings.com/birthday/images/birthday-cake-wishes-card.jpg" />
             </div>
-            <span className={styles.title}>People Online</span>
+            <span className={styles.title}>People Suggested</span>
             <OnlineUser />
             <OnlineUser />
             <OnlineUser />
