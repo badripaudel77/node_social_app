@@ -1,0 +1,41 @@
+
+.online {
+    display: flex;
+    flex-direction: column;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    background-color: wheat;
+    border-radius: 10px;
+}
+.username {
+    font-size: 21px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 11px;
+    margin-left: 10px;
+}
+
+.follow_button {
+    background-color: green;
+    border: none;
+    padding: 7px;
+    margin: 0 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: wheat;
+}
+
+.avatar {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    margin: 7px;
+}
+
+.username {
+    color : rgb(94, 93, 93);
+}
