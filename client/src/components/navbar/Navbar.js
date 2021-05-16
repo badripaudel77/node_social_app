@@ -6,10 +6,15 @@ import SearchIcon from '@material-ui/icons/Search'
 import PeopleIcon from '@material-ui/icons/People'
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
+import MenuIcon from '@material-ui/icons/Menu'
 
-const Navbar = () => {
+
+const Navbar = ({handleToggle}) => {
     return (
         <div className={styles.header}>
+                <div  className={`${styles.header_logo}`}>
+                    <span onClick={() => handleToggle()} className={styles.menuIcon}><MenuIcon /></span>
+                </div>
                 <div className={styles.header_logo}>
                     <span>Social App</span>
                 </div>
@@ -29,7 +34,7 @@ const Navbar = () => {
                     <div className={styles.header_profile}>
                         <img className={styles.header_avatar} src="/assets/person1.jpg" alt="profile" />
                     </div>
-                </div>
+        </div>
     )
 }
 

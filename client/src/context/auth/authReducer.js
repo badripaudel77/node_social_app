@@ -17,6 +17,7 @@ export default (state, action) => {
            return {
                     ...state,
                     ...action.payload,
+                    user : action.payload,
                     isAuthenticated : true,
                     loading : false,
                 }
@@ -39,6 +40,7 @@ export default (state, action) => {
                         isAuthenticated : false,
                         token : null,
                         loading : false,
+                        user : null,
                     } 
 
         default : 

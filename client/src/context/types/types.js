@@ -7,4 +7,6 @@ export const types = {
     USER_LOADED : 'USER_LOADED',
     AUTH_ERROR : 'AUTH_ERROR',
     CLEAR_ERRORS : 'CLEAR_ERRORS',
+    GET_POSTS : 'GET_POSTS',
+    GET_POSTS_ERROR : 'GET_POSTS_ERROR',
 } 

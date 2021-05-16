@@ -3,7 +3,6 @@ import axios from '../../api/axios'
 import AuthContext from './authContex'
 import authReducer from './authReducer'
 import { types } from '../types/types'
-//import setAuthToken from '../../utils/setAuthToken'
 
   const AuthState = props => {
     const initialState = {
@@ -84,6 +83,7 @@ import { types } from '../types/types'
   return (
     <AuthContext.Provider
       value={{
+        user : state.user,
         token: state.token,
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,

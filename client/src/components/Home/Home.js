@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import LeftSidebar from '../leftsidebar/LeftSidebar'
 import { MainFeed } from '../mainfeed/MainFeed';
@@ -15,11 +15,12 @@ import AuthContext from '../../context/auth/authContex'
 
 function Home() {
   const authContext = useContext(AuthContext)
-  const { isAuthenticated } = authContext
-  const history = useHistory();
-  
+  const { isAuthenticated, user } = authContext
+  const history = useHistory();  
   let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
-  
+
+  const [toggle, setToggle] = useState(false)
+
   useEffect(() => {
     if(!token) {
       return history.push('/login')
@@ -27,14 +28,17 @@ function Home() {
     authContext.loadUser() 
     // eslint-disable-next-line
   }, [token])
+  
+  const handleToggle = () => setToggle(value => !value)
+  console.log('toggle ' + toggle);
 
   return (
         <>
-            <Navbar />
+            <Navbar handleToggle= {handleToggle}/>
             <div className={styles.home_container}>
-                <LeftSidebar />
+                 <LeftSidebar toggle = {toggle} handleToggle={handleToggle} />
                  <MainFeed />
-                <RightSidebar />
+                 <RightSidebar />
            </div>
         </>
   );

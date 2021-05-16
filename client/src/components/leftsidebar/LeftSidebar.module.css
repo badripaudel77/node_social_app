@@ -1,15 +1,28 @@
-.leftSidebar {
+ .leftSidebar {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     flex: 2.5;
-     /* height: 100vh;  overflow occurs so deduct height of navbar */
-     height: calc(100vh - 60px);
-     overflow-y: scroll;
-     position: sticky;
-     /* same  as the height of navbar */
-     top: 60px; 
-}
+    /* overflow occurs so deduct height of navbar */ 
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+    position: sticky;
+    /* same  as the height of navbar */
+    top: 60px; 
+ } 
+.open {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 2.5;
+    height: calc(100vh - 60px);
+    position: sticky;
+    /* same  as the height of navbar */
+    top: 60px; 
+
+    /* background-color: teal; */
+} 
 
 /* style the default scroll bar (vertical scroll bar */
 /* ref : https://codepen.io/GhostRider/pen/GHaFw  */
@@ -32,15 +45,16 @@
     display: flex;
     align-items: center;
     width: 50%;
+    margin-top: 15px;
     margin-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .item:hover {
     background-color: wheat;
     border-radius: 40px;
     cursor: pointer;
-    padding: 1px;
+    width: 80%;
 }
 
 .icon {
@@ -50,3 +64,15 @@
 .text {
     margin: 3px 5px;
 }
+
+@media only screen and (max-width: 713px) {
+    .leftSidebar {
+      display: none;
+      flex: 0;
+    }
+  }
+@media only screen and (max-width: 800px) {
+    .text {
+      display: none;
+    }
+  }

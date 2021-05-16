@@ -8,29 +8,24 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
-import React, { useContext, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useContext } from 'react'
+//import { useHistory } from 'react-router-dom'
 
 import AuthContext from '../../context/auth/authContex'
 
-const LeftSidebar = () => {
-
-    const history = useHistory();
+const LeftSidebar = ({toggle, handleToggle}) => {
 
     const authContext = useContext(AuthContext)
     const { logout  } = authContext
 
     // let token = localStorage.getItem('token') ? localStorage.getItem('token') : nulls
-   
-
     const logout_ = (e) => {
-        //logout()
-        localStorage.removeItem('token')
-        history.push('/login')
+        logout()
     }
-   
     return (
-            <div className = {styles.leftSidebar}>
+            <div className = {toggle? styles.open : styles.leftSidebar} 
+                onClick={() => handleToggle()}
+            >
                 <div className={styles.item}>
                     <HomeRoundedIcon className={styles.icon}/> <span className={styles.text}>Home</span>
                 </div>
