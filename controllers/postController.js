@@ -3,7 +3,6 @@ const dotenv = require('dotenv')
 
 const Post = require('../models/Post');
 const User = require('../models/User');
-const { findOneAndRemove } = require('../models/User');
 
 //load the config file
 dotenv.config({path: './config/config.env' });
@@ -20,10 +19,10 @@ const getAllPosts = async (req, res, next) => {
 
         posts = await Post.find({owner : userId})
         if(posts.length == 0) return res.status(404).json({message : "No posts found."})
-        return res.status(200).json({message : posts})
+        return res.status(200).json({ message : posts })
     }
     catch(error) {
-        return res.status(500).json({message : "Something went wrong " + errro.message})
+        return res.status(500).json({error : "Something went wrong " + errro.message})
     }
 }
 
@@ -54,16 +53,20 @@ const createPost = async (req, res, next) => {
 
     if(!(req.user.userId === owner)) return res.status(401).json({error : "you're not authorized to perform this operation"})
 
-    const post = new Post({
-        title,
-        image,
-        owner,
-    })
-
     let user
     try {
         user = await User.findById(owner)
         if(!user) return res.status(404).json({error : "No user found"})
+        
+        const post = new Post({
+            title,
+            image,
+            owner,
+            name : user.name
+        })
+
+        console.log(post);
+
         await post.save()
         await user.updateOne({$push : { posts : post}})
         //return res.status(201).json({ message : { "post" : post }})

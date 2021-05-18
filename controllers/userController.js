@@ -13,7 +13,7 @@ const getUser = async (req, res, next) => {
     try {
         // don't include password.  
         const user = await User.findById(req.user.userId).select('-password'); 
-        return res.status(200).json({"message " : user})
+        return res.status(200).json({"message" : user})
 
     } catch (error) {
         return res.status(500).json({error : "User couldn't found."})
@@ -86,9 +86,8 @@ const userLogin = async (req, res, next) => {
                 process.env.token_secret,
             { expiresIn : '7h' });
 
-            res.header('auth_token');
+            res.header('auth_token') //set the header
             return res.status(200).json({message : "login Successfully done",token : token, email : user.email})
-    
         } 
         catch (error) {
             return res.status(500).json({ message : "Something went wrong while logging in."})             

@@ -1,11 +1,12 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useContext } from 'react'
 import axios from '../../api/axios'
 import PostContext from './postContext'
 import postReducer from './postReducer'
 import { types } from '../types/types'
 
 const PostState = props => {
-    const initialState = {
+
+  const initialState = {
           token: localStorage.getItem('token')? localStorage.getItem('token') : null,
           loading: true,
           error: null,
@@ -16,9 +17,10 @@ const PostState = props => {
     const [state, dispatch] = useReducer(postReducer, initialState);
 
     const getPosts = async () => {
+
         try {
-            const res = await axios.get('/posts/60a00632bc8c550d1029f305', { headers: {"auth_token" : `${localStorage.token}`} })
-            console.log('data ' , res.data.message);
+            const res = await axios.get('/posts/60a0c3e298389616984b23c2', { headers: {"auth_token" : `${localStorage.token}`} })
+            // console.log('data ' , res.data.message);
             dispatch({ type : types.GET_POSTS, payload  : res.data.message })
         } 
         catch (error) {

@@ -8,6 +8,13 @@ const PostSchema = new mongoose.Schema({
         required : true,
         trim : true
     },
+    name  : {
+        type : String, 
+        min : 3,
+        max : 300,
+        required : true,
+        trim : true
+    },
     
     //because image is just a string url 
     image : {

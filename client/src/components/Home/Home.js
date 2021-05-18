@@ -11,26 +11,25 @@ import styles from './Home.module.css'
 
 import AuthContext from '../../context/auth/authContex'
 
-
-
 function Home() {
   const authContext = useContext(AuthContext)
-  const { isAuthenticated, user } = authContext
+  const { isAuthenticated, user, loadUser } = authContext
   const history = useHistory();  
   let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
 
   const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
-    if(!token) {
+    if(!token && !isAuthenticated) {
       return history.push('/login')
     }
-    authContext.loadUser() 
+    loadUser()
     // eslint-disable-next-line
+    // {console.log(('user ? in home.js ' + user && user))}  
+
   }, [token])
   
   const handleToggle = () => setToggle(value => !value)
-  console.log('toggle ' + toggle);
 
   return (
         <>

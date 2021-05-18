@@ -1,4 +1,3 @@
-import { token } from 'morgan'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
