@@ -20,19 +20,18 @@ function Home() {
   const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
-    if(!token && !isAuthenticated) {
+    if((!token || token === undefined) && !isAuthenticated) {
       return history.push('/login')
     }
+    //console.log('useeffect');
     loadUser()
     // eslint-disable-next-line
-    // {console.log(('user ? in home.js ' + user && user))}  
-
   }, [token])
   
   const handleToggle = () => setToggle(value => !value)
-
   return (
         <>
+        {/* {console.log(('user ? in home.js ' + user && user._id))}   */}
             <Navbar handleToggle= {handleToggle}/>
             <div className={styles.home_container}>
                  <LeftSidebar toggle = {toggle} handleToggle={handleToggle} />

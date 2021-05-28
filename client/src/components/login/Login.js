@@ -6,16 +6,13 @@ import AuthContext from '../../context/auth/authContex'
 import  styles from './Login.module.css'
 
 const Login = () => {
-
     const history = useHistory();
-    
     const authContext = useContext(AuthContext)
-    const { login, isAuthenticated,error } = authContext
+    const { login, isAuthenticated, error } = authContext
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage , setErrorMessage] = useState('')
-
     //let token = localStorage.getItem('token') ? localStorage.getItem('token') : null
   
     useEffect(() => {
@@ -28,13 +25,13 @@ const Login = () => {
     const login_ = (e) => {
         setErrorMessage('')
         e.preventDefault()
-
         if(password === null) {
             setErrorMessage('* Password Can\'t be empty *')
             return ;
         }
         if(error) {
             setErrorMessage('* ' + error + ' *')
+            return;
         }
         try {
             login({

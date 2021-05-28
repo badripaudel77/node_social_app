@@ -7,13 +7,24 @@ export default (state, action) => {
                 ...state,
                 isAuthenticated : true,
                 loading : false,
-                user : action.payload,
+                user : action.payload, // user
               }
-      case types.REGISTER_SUCCESS:
-      case types.LOGIN_SUCCESS:
-
-        //   console.log('token when login / register suces : ' + action)
-           localStorage.setItem('token', action.payload.data.token)
+    
+    case types.LOGIN_SUCCESS:   
+            //console.log('token when login success : ' + action.payload.data.token) // ye token has come
+            localStorage.setItem('token', action.payload.data.token)
+            return {
+                     ...state,
+                     ...action.payload,
+                     user : action.payload,
+                     isAuthenticated : true,
+                     loading : false,
+                     token: localStorage.getItem('token') ? localStorage.getItem('token') : null
+                 }      
+      
+    case types.REGISTER_SUCCESS:
+          // console.log('token register success : ' + action.payload) // token has come yeah
+           localStorage.setItem('token', action.payload)
            return {
                     ...state,
                     ...action.payload,

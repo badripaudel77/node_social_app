@@ -19,7 +19,7 @@ const getAllPosts = async (req, res, next) => {
 
         posts = await Post.find({owner : userId})
         if(posts.length == 0) return res.status(404).json({message : "No posts found."})
-        return res.status(200).json({ message : posts })
+        return res.status(200).json(posts)
     }
     catch(error) {
         return res.status(500).json({error : "Something went wrong " + errro.message})

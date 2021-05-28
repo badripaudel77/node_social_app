@@ -1,5 +1,5 @@
 import React from 'react'
-import { OnlineUser } from '../online/OnlineUser'
+import { OnlineUser } from '../onlineUsers/OnlineUser'
 
 import styles from './RightSidebar.module.css'
 
@@ -11,7 +11,6 @@ const RightSidebar = () => {
                 <img alt="user" className={styles.img} src="https://www.143greetings.com/birthday/images/birthday-cake-wishes-card.jpg" />
             </div>
             <span className={styles.title}>People Suggested</span>
-            <OnlineUser />
             <OnlineUser />
             <OnlineUser />
             <OnlineUser />

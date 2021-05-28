@@ -13,7 +13,7 @@ const getUser = async (req, res, next) => {
     try {
         // don't include password.  
         const user = await User.findById(req.user.userId).select('-password'); 
-        return res.status(200).json({"message" : user})
+        return res.status(200).json( user)
 
     } catch (error) {
         return res.status(500).json({error : "User couldn't found."})
@@ -74,9 +74,7 @@ const userLogin = async (req, res, next) => {
         
     try {
             const user = await User.findOne({ email })
-            if(!user) {
-                return res.status(500).json({ error : "This Email hasn't been registered yet."})             
-            } 
+            if(!user) return res.status(500).json({ error : "This Email hasn't been registered yet."})
 
             const userPassword = await bcrypt.compare(password, user.password)
             if(!userPassword) return res.status(400).json({error : "credentials didn't match with our records"})
@@ -87,7 +85,7 @@ const userLogin = async (req, res, next) => {
             { expiresIn : '7h' });
 
             res.header('auth_token') //set the header
-            return res.status(200).json({message : "login Successfully done",token : token, email : user.email})
+            return res.status(200).json({message : "login Successfully done",token : token, email : user.email, id : user._id})
         } 
         catch (error) {
             return res.status(500).json({ message : "Something went wrong while logging in."})             

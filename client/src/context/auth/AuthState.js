@@ -5,6 +5,7 @@ import authReducer from './authReducer'
 import { types } from '../types/types'
 
   const AuthState = props => {
+    //what will be the initial state ?
     const initialState = {
           token: localStorage.getItem('token')? localStorage.getItem('token') : null,
           isAuthenticated: null,
@@ -19,13 +20,12 @@ import { types } from '../types/types'
      //console.log('is token present ' + localStorage.token); yes
     try {
      const res = await axios.get('/users/user', { headers: {"auth_token" : `${localStorage.token}`} })
-     //console.log("user loaded data ", res.data);
+     //console.log("user loaded data ", res.data._id)
       dispatch({
         type: types.USER_LOADED,
         payload: res.data //user
       });
     } 
-
     catch (err) {
       dispatch({ type: types.AUTH_ERROR });
     }
@@ -38,13 +38,14 @@ import { types } from '../types/types'
           'Content-Type': 'application/json'
         }};
     try {
-        const res = await axios.post('/users/register', formData, config);
+        const res = await axios.post('/users/register', formData, config)
+       // console.log( "token is " + res.data.token ) token has come
+        //if everything goes well, dispatch register success 
         dispatch({
                 type: types.REGISTER_SUCCESS,
-                payload: res
+                payload: res.data.token // token as payload
         }); 
         loadUser(); 
-
     } 
     catch (err) {
       dispatch({
@@ -55,7 +56,8 @@ import { types } from '../types/types'
   };
 
   // Login User
-  const login = async formData => {
+   // Login User
+   const login = async formData => {
     const config = {
       headers: {
         'Content-Type': 'application/json'

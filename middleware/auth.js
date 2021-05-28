@@ -4,7 +4,8 @@ const authenticateUser = (req, res, next) => {
     try {
 
          const token = req.header('auth_token') 
-         console.log('tokne / ' + token  );
+         console.log('token / ' + token  ) // see if the token has been sent in header
+         
          //anything like this can be used because 
         //auth_token or Bearer token is what we send from postman or brower in request. 
         // just code according to that.
